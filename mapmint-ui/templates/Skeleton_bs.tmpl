@@ -71,6 +71,7 @@ $istyles
 	"publisher": "laptop",
 	"georeferencer": "globe",
 	"importers": "upload"
+  "cesium": "upload"
 }
   <!-- Navigation -->
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
@@ -116,12 +117,12 @@ $istyles
 
 #if $mmenu0 is None	    
 #if 'indicators' in $conf["mm"].keys() and $conf["main"]["indicators"]=="true"
-#set menu=['Dashboard','Distiller','Territories','Indicators','Themes','Documents','Manager','Publisher']
+#set menu=['Dashboard','Distiller','Territories','Indicators','Themes','Documents','Manager','Publisher', 'Cesium']
 #else
 #if 'indicators' in $conf["mm"].keys() and $conf["mm"]["documents"]=="true"
-#set menu=['Dashboard','Distiller','Manager','Themes','Documents','Publisher']
+#set menu=['Dashboard','Distiller','Manager','Themes','Documents','Publisher', 'Cesium']
 #else
-#set menu=['Dashboard','Distiller','Manager','Themes','Publisher']
+#set menu=['Dashboard','Distiller','Manager','Themes','Publisher', 'Cesium']
 #end if
 #end if
 #if 'tables' in $conf["mm"].keys() and $conf["mm"]["tables"]=="true"
@@ -224,6 +225,6 @@ $tfooter
 </div>
 
 <script data-main="$conf["main"]["mmAddress"]/admin;module=$mmodule" src="$conf["main"]["publicationUrl"]/assets/js/lib/require.js"></script>
-
+<script src="/pm//assets/js/lib/Cesium-1.94.3/Build/Cesium/Cesium.js"></script>
 </body>
 </html>

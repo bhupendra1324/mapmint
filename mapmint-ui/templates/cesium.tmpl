@@ -1,0 +1,119 @@
+#from Cheetah.Template import Template
+#extends Template
+#encoding UTF-8
+#from Skeleton_bs import Skeleton_bs
+#extends Skeleton_bs
+
+#attr $mmodule = "Manager"
+
+#attr $ocss = []
+
+#def istyles
+<link rel="stylesheet" type="text/css" href="$conf["main"]["publicationUrl"]/assets/css/font-mfizz.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.8/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.0.0/css/buttons.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.2.0/css/colReorder.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.0.0/css/select.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.0.0/css/rowReorder.dataTables.min.css" />
+<link rel="stylesheet" href="$conf["main"]["publicationUrl"]/assets/css/jquery.splitter.css"/>
+<link rel="stylesheet" href="$conf["main"]["publicationUrl"]/css/ol.css"/>
+<link rel="stylesheet" href="$conf["main"]["publicationUrl"]/assets/css/bootstrap-colorpicker.min.css"/>
+<link rel="stylesheet" type="text/css" href="/pm//assets/js/lib/Cesium-1.94.3/Build/Cesium/Widgets/widgets.css" />
+<link rel="stylesheet" type="text/css" href="./main.css" />
+
+#end def
+
+#def page_title
+MapMint: $mmodule
+#end def
+
+#def printAdder($obj)
+     <#if "ltype" in $obj.keys()#$obj["ltype"]#else#li#end if# class="hide" id="$obj["id"]">
+       <div class="padder">
+	 <h4>$obj["title"]</h4>
+	 <hr />
+       </div>
+       <div class="input-group">
+	 <input class="form-control" id="$obj["id"]" placeholder="$obj["placeholder"]" type="text" />
+	 <span class="input-group-btn" title="$obj["title"]" rel="tooltip">
+	   <button class="btn btn-default" id="$obj["action"]["name"]" onclick="app.basic('$(obj["action"]["name"])',\$(this).parent().prev());" type="button">$obj["action"]["title"]</button>
+	 </span>
+       </div>   
+     </#if "ltype" in $obj.keys()#$obj["ltype"]#else#li#end if#>
+#end def
+
+#def admin_menu
+     <li class="dropdown">
+       <a class="dropdown-toggle" data-toggle="dropdown" href="#empty">
+         <img width="24" height="24" id="sbl" class="img-responsive blp" src="http://a.tile.openstreetmap.org/0/0/0.png" /> <i class="fa fa-caret-down"></i>
+       </a>
+       <ul class="dropdown-menu dropdown-bl">
+	 <li><a href="#"><img width="24" height="24" class="img-responsive blp" src="http://a.tile.openstreetmap.org/0/0/0.png" /> OpenStreetMap</a>
+	 </li>
+	 <li><a href="#"><img width="24" height="24" class="img-responsive blp" src="http://a.tile.openstreetmap.fr/hot//0/0/0.png" />  OpenStreetMap HOT</a>
+	 </li>
+	 <li><a href="#"><img width="24" height="24" class="img-responsive blp" src="http://maps.wikimedia.org/osm-intl/0/0/0.png" />  OpenCycleMap</a>
+	 </li>
+	 <li class="divider"></li>
+	 <li><a href="#"><img width="24" height="24" id="blcolpicker" class="img-responsive blp" src="http://placehold.it/24/000000/000000/" /> $zoo._("Colored base layer")</a>
+	 </li>
+       </ul>
+       <!-- /.dropdown-user -->
+     </li>
+#end def
+
+#def mmenu
+ <ul class="nav nav-first-level collapse in">
+
+  <li class="active" id="cesiumswitcher">
+  <a href="cesium"><i class="fa fa-cube"></i></i>  <span class="fa arrow"></span>3D Visualization</a>
+       <ul class="nav nav-first-level">
+     <li>
+	<div class="input-group">
+	   <input class="form-control" id="cesiumToken" type="text" placeholder="Enter Access Token" />
+    </div> 
+
+       <div class="input-group">
+      <input class="form-control" id="cesiumResource" 
+	  type="number" placeholder="Enter Resource ID" rel="tooltip" />
+      <span class="input-group-btn" title="Load" rel="tooltip">
+       <button class="btn btn-default" style="margin-left:1rem" type="button" id="cesiumLoad">Load</button>
+      </span>
+    </div> 
+
+     </li>
+	 </ul>
+  </li>
+  
+
+#end def
+
+#def body
+#import zoo
+
+
+#def printTabHeader(id,title,font,classe)
+<li role="presentation" #if $classe is not None#class="$classe"#end if#>
+  <a id="$(id)_Toggler" href="#$id" aria-controls="home" role="tab" data-toggle="tab">
+    <i class="#if $font.count("fa-")#fa#end if# $font fa-fw"></i>
+    <span class="hidden-xs hidden-sm hidden-md">
+      $title
+    </span>
+  </a>
+</li>
+#end def
+
+        <div id="manaMap" class="col-mxd-12" style="padding:2rem;margin:0;">
+        
+	  <div id="main" class="col-sm-12">
+      <div id="cesiumContainer"></div>
+	    
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<script src="/pm//assets/js/lib/jquery/jquery-2.1.3.min.js"></script>
+<script src="/pm//assets/js/lib/Cesium-1.94.3/Build/Cesium/Cesium.js"></script>
+<script src="/pm//assets/js/ctiles.js"></script>
+#end def
